@@ -1,0 +1,94 @@
+@host = http://localhost:3000
+### Register new user
+POST {{host}}/register
+Content-Type: application/json
+
+{
+    "username": "admin@admin",
+    "password": "password2"
+}
+
+### Login user
+# @name login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "username": "admin@admin",
+    "password": "password"
+}
+
+### Get all the departments
+GET {{host}}/departments
+
+### Gets a specific department
+GET {{host}}/departments/3
+
+### Post a new department if loged in
+@token = {{login.response.body.token}}
+POST {{host}}/departments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Comedy",
+    "description": "loremipsiuhsufnsajndkjsandjksand",
+    "image": "https://www.latimes.com/entertainment-arts/story/2022-08-07/la-et-comedy-issue-commentary-the-best-lesson-in-comedy-is-learning-how-to-laugh-at-yourself",
+    "info": "departmentdepartmentdepartmentdepartmentdepartmentdepartment",
+    "professors": [5,10,15]
+}
+
+### Delete a department 
+DELETE {{host}}/departments/9
+Authorization: Bearer {{token}}
+
+### Add or remove professors
+PATCH {{host}}/departments/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "uuu",
+    "description": "rrr",
+    "image": "yyy",
+    "info": "hhh",
+    "professorIds": [1, 2, 3]
+}
+
+### Get list of all professors
+GET {{host}}/faculty
+
+### Get a specific professor
+GET {{host}}/faculty/16
+
+### Professor does not exist
+GET {{host}}/faculty/400
+
+### Update an existing professor's info
+PATCH {{host}}/faculty/6
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Zedd",
+    "email": "telos@zedd.com",
+    "bio": "Listen to my new album, Telos!",
+    "departmentId": 2
+}
+
+### Create a professor
+POST {{host}}/faculty
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Crankdat",
+    "email": "rave@rave.com",
+    "bio": "bio",
+    "image": "uuu",
+    "department": 4
+}
+
+### Delete a professor
+DELETE {{host}}/faculty/21
+Authorization: Bearer {{token}}

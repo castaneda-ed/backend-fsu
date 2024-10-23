@@ -1,0 +1,25 @@
+Table User {
+  id        Int     [pk, increment]
+  username  String  [unique]
+  password  String 
+}
+
+Table Department {
+  id            Int     [pk, increment]
+  name String
+  description String
+  image String
+  info String
+  faculty Professor[]
+}
+
+Table Professor {
+  id        Int [pk, increment]
+  name String
+  email String
+  bio String
+  img String
+  department Department
+}
+
+Ref: Department.faculty < Professor.department
